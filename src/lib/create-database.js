@@ -1,15 +1,23 @@
-// const Bluebird = require('bluebird');
+const Bluebird = require('bluebird');
 // const request = Bluebird.promisifyAll(require('request'));
+const request = Bluebird.promisify(require('request'));
 
-// const { createUrl } = require('../utils/constant').spreadsheet;
+const { spreadsheet } = require('../utils/constant');
 
-// module.exports = async (accessToken) => Bluebird.resolve()
-//   .then(async () => {
-//     const response = await request({
-//       method: 'POST',
-//       url: createUrl,
-//       headers: {
-//         Authorization: `Bearer ${accessToken}`,
-//       },
-//     })
-//   });
+module.exports = (accessToken, dbname) => Bluebird.resolve()
+  .then(async () => {
+    const requestObject = {
+      properties: {
+        title: dbname,
+      },
+    };
+
+    return request({
+      method: 'POST',
+      url: spreadsheet.createUrl,
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      json: requestObject,
+    });
+  });
