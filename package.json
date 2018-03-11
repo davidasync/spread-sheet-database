@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "flow": "flow",
-    "build": "./node_modules/.bin/flow-remove-types src/ -d dist/"
+    "build": "./node_modules/.bin/flow-remove-types --pretty --sourcemaps src/ -d dist/"
   },
   "keywords": [],
-  "author": "",
+  "author": "davidasync",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.1",
