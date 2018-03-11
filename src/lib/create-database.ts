@@ -1,24 +1,15 @@
-/* @flow */
-
-/* ::
-type database = {
-  dbname: string,
-  tables: Array<String>
-};
-*/
-
-const { map } = require('lodash');
 const Bluebird = require('bluebird');
 const request = Bluebird.promisify(require('request'));
 
-const { spreadsheet } = require('../utils/constant');
+import { Url } from '../utils/constant';
+import Database from '../interfaces/database';
 
-module.exports = (accessToken /* : string */, database /* : database */) /* : Promise<Object> */ =>
+export default (accessToken: string, database: Database) =>
   Bluebird.resolve()
     .then(async () => {
       const { dbname, tables } = database;
 
-      const sheetProperties = map(tables, table => ({
+      const sheetProperties = tables.map(table => ({
         properties: {
           title: table,
         },
@@ -33,7 +24,7 @@ module.exports = (accessToken /* : string */, database /* : database */) /* : Pr
 
       return request({
         method: 'POST',
-        url: spreadsheet.createUrl,
+        url: Url.createSpreadSheetUrl,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },

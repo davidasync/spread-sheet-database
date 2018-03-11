@@ -1,30 +1,25 @@
-// @flow
-
-/* ::
-type credential = {
-  clientID: string,
-  clientSecret: string,
-  refreshToken: string
-};
-*/
 
 const sgd = require('selfish-google-drive');
 const { get } = require('lodash');
 const { reject } = require('bluebird');
 
+import Credential from '../interfaces/credential'
+import SgdToken from '../interfaces/sgd-token'
+
 const MAX_ERROR_TRY = 3;
 
-module.exports =
-  (credential /* :credential */, func /* :function */) => (paramObject /* :Object */) => {
+export default (credential: Credential, func: Function) => (paramObject: any) => {
     const { loadToken } = sgd(credential);
-    const closure = {};
+    const closure = {
+      maxTry: 0,
+    };
 
     closure.maxTry = MAX_ERROR_TRY;
 
-    const wrappedFunction = shouldRefreshToken => loadToken(shouldRefreshToken)
-      .then(response => get(response, 'access_token'))
-      .then(accessToken => func(accessToken, paramObject))
-      .then((response) => {
+    const wrappedFunction = (shouldRefreshToken: Boolean) => loadToken(shouldRefreshToken)
+      .then((response: SgdToken) => get(response, 'access_token'))
+      .then((accessToken: string) => func(accessToken, paramObject))
+      .then((response: any) => {
         const responseStatus = response.status || response.statusCode;
 
         if (responseStatus >= 400) {
@@ -45,5 +40,5 @@ module.exports =
         return get(response, 'body') || response;
       });
 
-    return wrappedFunction();
+    return wrappedFunction(false);
   };

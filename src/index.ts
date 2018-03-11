@@ -1,22 +1,14 @@
-/* @flow */
 
-/* ::
-type credential = {
-  clientID: string,
-  clientSecret: string,
-  refreshToken: string
-};
-*/
 
-const createDatabase = require('../src/lib/create-database');
-
-const wrapWithLoadToken = require('./utils/wrapWithLoadToken');
+import Credential from './interfaces/credential';
+import createDatabase from './lib/create-database';
+import wrapWithLoadToken from './utils/wrap-with-load-token';
 
 const library = {
   createDatabase,
 };
 
-module.exports = (credential /* :credential */) /* :any */ => {
+module.exports = (credential: Credential): any => {
   const { clientID, clientSecret, refreshToken } = credential;
 
   if (!clientID || !clientSecret || !refreshToken) {
