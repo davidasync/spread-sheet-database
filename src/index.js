@@ -1,7 +1,8 @@
+/* @flow */
+
 const { mapValues, get } = require('lodash');
 const Bluebird = require('bluebird');
 
-// const loadToken = require('./utils/load-token');
 const createDatabase = require('../src/lib/create-database');
 const sgd = require('selfish-google-drive');
 
@@ -10,7 +11,15 @@ const library = {
   createDatabase,
 };
 
-module.exports = (credential) => {
+/* ::
+type credential = {
+  clientID: string,
+  clientSecret: string,
+  refreshToken: string
+};
+*/
+
+module.exports = (credential /* :credential */) /* :Promise<Array<function>> */ => {
   const { clientID, clientSecret, refreshToken } = credential;
 
   if (!clientID || !clientSecret || !refreshToken) {
