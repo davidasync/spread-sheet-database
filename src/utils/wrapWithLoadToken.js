@@ -14,11 +14,13 @@ const { reject } = require('bluebird');
 
 const MAX_ERROR_TRY = 3;
 
-module.exports = (credential /* :credential */, func /* :function */) =>
-  (paramObject /* :any */) => {
+module.exports =
+  (credential /* :credential */, func /* :function */) => (paramObject /* :Object */) => {
     const { loadToken } = sgd(credential);
     const closure = {};
+
     closure.maxTry = MAX_ERROR_TRY;
+
     const wrappedFunction = shouldRefreshToken => loadToken(shouldRefreshToken)
       .then(response => get(response, 'access_token'))
       .then(accessToken => func(accessToken, paramObject))
@@ -35,6 +37,7 @@ module.exports = (credential /* :credential */, func /* :function */) =>
           }
 
           closure.maxTry -= 1;
+
           // Force func load token to refresh token
           return wrappedFunction(true);
         }
