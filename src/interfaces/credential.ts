@@ -1,5 +1,5 @@
-export default interface Credential {
-  clientID: string,
-  clientSecret: string,
-  refreshToken: string
+export default interface credential {
+  clientID: string;
+  clientSecret: string;
+  refreshToken: string;
 }

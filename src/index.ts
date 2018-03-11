@@ -1,6 +1,6 @@
 
 
-import Credential from './interfaces/credential';
+import credential from './interfaces/credential';
 import createDatabase from './lib/create-database';
 import wrapWithLoadToken from './utils/wrap-with-load-token';
 
@@ -8,7 +8,7 @@ const library = {
   createDatabase,
 };
 
-module.exports = (credential: Credential): any => {
+module.exports = (credential: credential): Object => {
   const { clientID, clientSecret, refreshToken } = credential;
 
   if (!clientID || !clientSecret || !refreshToken) {

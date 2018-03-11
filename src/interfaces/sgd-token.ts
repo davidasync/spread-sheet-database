@@ -1,5 +1,5 @@
-export default interface SgdToken {
-  access_token: string,
-  token_type: string,
-  expires_in: number
+export default interface sgdToken {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
 }

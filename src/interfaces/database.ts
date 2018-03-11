@@ -1,4 +1,4 @@
-export default interface Database {
-  dbname: string,
-  tables: Array<string>
+export default interface database {
+  dbname: string;
+  tables: [string];
 }

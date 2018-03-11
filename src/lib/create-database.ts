@@ -1,11 +1,11 @@
-const Bluebird = require('bluebird');
-const request = Bluebird.promisify(require('request'));
+const bluebird = require('bluebird');
+const request = bluebird.promisify(require('request'));
 
-import { Url } from '../utils/constant';
-import Database from '../interfaces/database';
+import constant from '../utils/constant';
+import database from '../interfaces/database';
 
-export default (accessToken: string, database: Database) =>
-  Bluebird.resolve()
+export default (accessToken: string, database: database): Promise<Object> =>
+  bluebird.resolve()
     .then(async () => {
       const { dbname, tables } = database;
 
@@ -24,7 +24,7 @@ export default (accessToken: string, database: Database) =>
 
       return request({
         method: 'POST',
-        url: Url.createSpreadSheetUrl,
+        url: constant.createSpreadSheetUrl,
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
