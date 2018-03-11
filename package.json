@@ -2,20 +2,27 @@
   "name": "spread-sheet-database",
   "version": "1.0.0",
   "description": "Make google spread sheet api like database",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "flow": "flow",
-    "build": "./node_modules/.bin/flow-remove-types --pretty --sourcemaps src/ -d dist/"
+    "tsc": "tsc",
+    "build": "tsc"
   },
-  "keywords": [],
+  "keywords": [
+    "spread-sheet-database",
+    "google-api",
+    "google-spread-sheet",
+    "spread-sheet",
+    "excel",
+    "wrapper",
+    "database"
+  ],
   "author": "davidasync",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.1",
     "lodash": "^4.17.5",
     "request": "^2.83.0",
-    "selfish-google-drive": "^1.0.9",
-    "superagent": "^3.8.2"
+    "selfish-google-drive": "^1.0.9"
   },
   "devDependencies": {
     "@types/node": "^9.4.7",
