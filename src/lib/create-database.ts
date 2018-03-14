@@ -2,6 +2,7 @@ const bluebird = require('bluebird');
 const request = bluebird.promisify(require('request'));
 
 import constant from '../utils/constant';
+
 import database from '../interfaces/database';
 
 export default (accessToken: string, database: database): Promise<Object> =>
